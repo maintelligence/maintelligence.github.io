@@ -108,7 +108,7 @@ function loadProducts(){
                     <div class="product-price">Price: ${post.price}</div>
                     <div class="product-description">${post.description}</div>
                     <div class="product-city">City: ${post.city}</div>
-                    https://wa.me/${post.contact.replace
+                    <a href="https://wa.me/${post.contact}" target="_blank" class="contact-link">Contact Seller</a>
                 `;
                 container.appendChild(card);
             }
@@ -138,4 +138,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 </body>
-</html>
+    </html>
