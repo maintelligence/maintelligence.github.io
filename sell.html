@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Intelligence</title>
+<style>
+    body { margin:0; background:white; font-family:Arial,sans-serif; color:black; }
+    .topbar { background:black; color:white; padding:15px; font-size:20px; font-weight:bold; text-align:center; }
+    .page { display:none; padding:20px; }
+    .active { display:block; }
+    .center-label { text-align:center; font-size:26px; font-weight:bold; margin-top:200px; margin-bottom:180px; }
+    .btn { width:100%; padding:15px; background:black; color:white; border:1px solid white; border-radius:8px; font-size:17px; cursor:pointer; margin-bottom:20px; }
+    .btn-small { padding:10px 15px; width:fit-content; background:black; color:white; border:1px solid white; border-radius:6px; cursor:pointer; margin-bottom:15px; }
+    .card { background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px black; margin-top:20px; }
+    input, textarea { width:90%; padding:12px; border-radius:6px; border:1px solid black; margin-top:10px; font-size:16px; background:white; color:black; margin-bottom:10px; }
+    #previewImage { width:100%; border-radius:6px; display:none; margin-bottom:15px; border:1px solid white; }
+    #sellPage .card h2 { margin-top:20px; margin-bottom:20px; padding:5px 0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">MA Intelligence</div>
+
+<!-- MAIN PAGE -->
+<section id="mainPage" class="page active">
+    <div style="text-align:right; margin-bottom:15px;">
+        <button class="btn-small" onclick="openPage('privacyPage')">Privacy Policy</button>
+    </div>
+    <div class="center-label">MA Intelligence</div>
+    <button class="btn" onclick="openPage('sellPage')">Add Post of your product</button>
+</section>
+
+<!-- SELL / ADD POST PAGE -->
+<section id="sellPage" class="page">
+    <div class="card">
+        <h2>Add New Post</h2>
+        <img id="previewImage" alt="Preview Image">
+        <button class="btn" onclick="document.getElementById('imageInput').click()">Choose Image</button>
+        <input type="file" id="imageInput" accept="image/*" style="display:none;">
+        <label style="font-weight:bold;">Price:-</label>
+        <input type="number" id="priceInput" placeholder="Enter Price">
+        <label style="font-weight:bold;">Description:-</label>
+        <textarea id="descInput" rows="4" placeholder="Write Description"></textarea>
+        <label style="font-weight:bold;">WhatsApp Number / Link:-</label>
+        <input type="text" id="waInput" placeholder="WhatsApp number / Link">
+        <button class="btn" onclick="submitPost()">Submit Post</button>
+        <button class="btn-small" onclick="openPage('mainPage')">← Back</button>
+    </div>
+</section>
+
+<!-- PRIVACY POLICY PAGE -->
+<section id="privacyPage" class="page">
+    <div class="card">
+        <h2>Privacy Policy</h2>
+        <p>• We do not store unnecessary personal data.</p>
+        <p>• Only the data you enter while posting will be stored.</p>
+        <p>• All posts will be visible publicly.</p>
+        <p>• Data is stored securely in Firebase.</p>
+        <p>• No marketing or third-party sharing.</p>
+        <button class="btn-small" onclick="openPage('mainPage')">← Back</button>
+    </div>
+</section>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyB9Jt_TdznUMTHQuZIZgy1WYSmJ1RyWasQ",
+    authDomain: "ma-intelligence-6077c.firebaseapp.com",
+    projectId: "ma-intelligence-6077c",
+    storageBucket: "ma-intelligence-6077c.firebasestorage.app",
+    messagingSenderId: "898857359610",
+    appId: "1:898857359610:web:e5c593b849c28669035143"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
+
+<script>
+function openPage(pageId){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+/* Image Preview */
+document.getElementById('imageInput').addEventListener('change', function(){
+    const file = this.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const img = document.getElementById("previewImage");
+        img.src = e.target.result;
+        img.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+});
+
+/* Submit Post with City */
+function submitPost(){
+    const description = document.getElementById('descInput').value.trim();
+    const price = document.getElementById('priceInput').value.trim();
+    const contact = document.getElementById('waInput').value.trim();
+    const imageURL = document.getElementById('previewImage').src;
+
+    const city = localStorage.getItem("selectedCity"); // Fetch selected city
+    if(!city){
+        alert("Please select a city first");
+        return;
+    }
+
+    if(!description || !price || !contact || !imageURL){
+        alert("Please fill all fields and choose an image.");
+        return;
+    }
+
+    const post = { description, price, contact, imageURL, city };
+
+    database.ref('posts/').push(post)
+      .then(()=> alert("Post submitted successfully!"))
+      .catch(err=> alert("Error: " + err.message));
+
+    // Clear form
+    document.getElementById('descInput').value = '';
+    document.getElementById('priceInput').value = '';
+    document.getElementById('waInput').value = '';
+    document.getElementById('previewImage').style.display = 'none';
+}
+</script>
+</body>
+</html>

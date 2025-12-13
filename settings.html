@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Settings - MA Intelligence</title>
+
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    background:#ffffff;
+    color:#000;
+  }
+
+  /* SAME TOP BAR LIKE HOME */
+  .top-bar {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:60px;
+    background:black;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 20px;
+    color:white;
+    z-index:1000;
+  }
+  .logo { font-weight:900; font-size:22px; }
+
+  .back-btn {
+    color:white;
+    font-weight:900;
+    font-size:18px;
+    text-decoration:none;
+  }
+
+  /* Page body */
+  .container {
+    max-width:700px;
+    margin:100px auto 40px;
+    padding:20px;
+  }
+
+  .card {
+    background:#f8f8f8;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+  }
+
+  /* Profile area */
+  .avatar {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ddd;
+    border:3px solid black;
+    cursor:pointer;
+  }
+  .avatar img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  input[type="text"], input[type="date"] {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+  }
+
+  .btn {
+    padding:12px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    margin-right:10px;
+  }
+  .save { background:black; color:white; }
+  .cancel { background:#ddd; }
+  .logout { background:black; color:white; }
+  .go-home { background:#ddd; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR (same as home) -->
+<div class="top-bar">
+  <a class="back-btn" href="home.html">← Back</a>
+  <div class="logo">MA Intelligence</div>
+  <div style="width:40px"></div>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Edit Profile</h3>
+
+    <!-- PROFILE PHOTO -->
+    <div id="avatar" class="avatar" onclick="fileInput.click()">
+      <span id="uploadText">Upload</span>
+    </div>
+
+    <input id="fileInput" type="file" accept="image/*" style="display:none">
+
+    <!-- USERNAME -->
+    <label>Username</label>
+    <input id="nameInput" type="text" placeholder="Enter your username">
+
+    <!-- DOB -->
+    <label>Date of Birth</label>
+    <input id="dobInput" type="date">
+
+    <button class="btn save" onclick="saveChanges()">Save Changes</button>
+    <button class="btn cancel" onclick="loadData()">Cancel</button>
+  </div>
+
+  <div class="card">
+    <h3>Account</h3>
+    <button class="btn logout" onclick="logout()">Logout</button>
+    <button class="btn go-home" onclick="gotoHome()">Go to Home</button>
+  </div>
+
+</div>
+
+<script>
+  const avatar = document.getElementById("avatar");
+  const uploadText = document.getElementById("uploadText");
+  const fileInput = document.getElementById("fileInput");
+
+  function loadData() {
+    const storedImg = localStorage.getItem("userImage");
+    const storedName = localStorage.getItem("userName");
+    const storedDOB = localStorage.getItem("userDOB");
+
+    // Load Name
+    document.getElementById("nameInput").value = storedName || "";
+
+    // Load DOB
+    document.getElementById("dobInput").value = storedDOB || "";
+
+    // Load Image
+    if (storedImg) {
+      avatar.innerHTML = `<img src="${storedImg}">`;
+    } else {
+      avatar.innerHTML = "Upload";
+    }
+  }
+
+  // When selecting new image
+  fileInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      avatar.innerHTML = `<img src="${e.target.result}">`;
+      avatar.dataset.newImage = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function saveChanges() {
+    const name = document.getElementById("nameInput").value;
+    const dob = document.getElementById("dobInput").value;
+
+    if (name.trim() !== "") {
+      localStorage.setItem("userName", name);
+    }
+
+    if (dob.trim() !== "") {
+      localStorage.setItem("userDOB", dob);
+    }
+
+    // Save image if changed
+    if (avatar.dataset.newImage) {
+      localStorage.setItem("userImage", avatar.dataset.newImage);
+    }
+
+    window.location.href = "home.html";
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+  }
+
+  function gotoHome() {
+    window.location.href = "home.html";
+  }
+
+  loadData();
+</script>
+
+</body>
+</html>

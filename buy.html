@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Intelligence - Buy Page</title>
+<style>
+    body { margin:0; font-family:Arial,sans-serif; background:white; color:black; }
+    .topbar { background:black; color:white; padding:15px; font-size:20px; font-weight:bold; text-align:center; }
+    .page { display:none; padding:20px; }
+    .active { display:block; }
+    .btn-small { padding:10px 15px; background:black; color:white; border:1px solid white; border-radius:6px; cursor:pointer; margin-bottom:15px; }
+    .card { background:#f5f5f5; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top:20px; }
+    .search-input { width:100%; padding:12px; border-radius:6px; border:1px solid #ccc; margin-bottom:15px; font-size:16px; }
+    .product-card { background:#f5f5f5; padding:15px; margin-bottom:20px; border-radius:8px; box-shadow:0 0 5px rgba(0,0,0,0.1); }
+ /* FULL IMAGE – NO CROP */
+.product-image {
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:6px;
+}
+    .product-price { font-weight:bold; margin-top:10px; }
+    .product-description { margin-top:10px; }
+    .contact-link { margin-top:10px; display:inline-block; color:blue; text-decoration:underline; }
+    .no-results { margin-top:20px; font-weight:bold; color:red; }
+</style>
+</head>
+<body>
+
+<div class="topbar">MA Intelligence</div>
+
+<section id="mainPage" class="page active">
+    <div style="text-align:right;">
+        <button class="btn-small" onclick="openPage('privacyPage')">Privacy Policy</button>
+    </div>
+
+    <div class="card">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search products...">
+        <div id="productsContainer"></div>
+        <div id="noResults" class="no-results" style="display:none;">No results found</div>
+    </div>
+</section>
+
+<section id="privacyPage" class="page">
+    <div class="card">
+        <h2>Privacy Policy</h2>
+        <p>• We only provide product listings.</p>
+        <p>• We are not responsible for any transactions.</p>
+        <p>• Resellers handle all contact with buyers.</p>
+        <p>• All posts are visible publicly.</p>
+        <button class="btn-small" onclick="openPage('mainPage')">← Back</button>
+    </div>
+</section>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB9Jt_TdznUMTHQuZIZgy1WYSmJ1RyWasQ",
+  authDomain: "ma-intelligence-6077c.firebaseapp.com",
+  projectId: "ma-intelligence-6077c",
+  storageBucket: "ma-intelligence-6077c.firebasestorage.app",
+  messagingSenderId: "898857359610",
+  appId: "1:898857359610:web:e5c593b849c28669035143"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+</script>
+
+<script>
+function openPage(pageId){
+    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+    document.getElementById(pageId).style.display='block';
+}
+
+function loadProducts(){
+    const container = document.getElementById('productsContainer');
+    const noResults = document.getElementById('noResults');
+    const selectedCity = localStorage.getItem("selectedCity");
+
+    if(!selectedCity){
+        container.innerHTML = "<p style='color:red;font-weight:bold;'>Please select a city first.</p>";
+        return;
+    }
+
+    database.ref('posts').on('value', snapshot => {
+        container.innerHTML = '';
+        const data = snapshot.val();
+
+        if(!data){
+            noResults.style.display = 'block';
+            return;
+        }
+
+        let hasPosts = false;
+
+        Object.values(data).forEach(post => {
+            if(post.city === selectedCity){
+                hasPosts = true;
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${post.imageURL}" class="product-image">
+                    <div class="product-price">Price: ${post.price}</div>
+                    <div class="product-description">${post.description}</div>
+                    <div class="product-city">City: ${post.city}</div>
+                    <a href="https://wa.me/${post.contact}" target="_blank" class="contact-link">Contact Seller</a>
+                `;
+                container.appendChild(card);
+            }
+        });
+
+        noResults.style.display = hasPosts ? 'none' : 'block';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts();
+
+    document.getElementById('searchInput').addEventListener('input', function(){
+        const q = this.value.toLowerCase();
+        let found = false;
+        document.querySelectorAll('.product-card').forEach(card=>{
+            if(card.textContent.toLowerCase().includes(q)){
+                card.style.display='block';
+                found = true;
+            } else {
+                card.style.display='none';
+            }
+        });
+        document.getElementById('noResults').style.display = found ? 'none' : 'block';
+    });
+});
+</script>
+
+</body>
+</html>

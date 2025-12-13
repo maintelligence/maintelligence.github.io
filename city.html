@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select City</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        /* overflow: hidden;  ❌ REMOVED because it blocks clicks */
+    }
+
+    .header {
+        background: #000;
+        color: white;
+        padding: 14px 18px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .gap {
+        height: 12px;
+        background: #f2f2f2;
+    }
+
+    .search-container {
+        background: #000;
+        padding: 2px 2px;
+        margin: 0px 12px;
+        border-radius: 10px;
+    }
+
+    .search-input {
+        width: 94%;
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .city-list {
+        height: calc(100vh - 160px);
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    .city-box {
+        border: 1px solid #ddd;
+        padding: 14px;
+        border-radius: 10px;
+        margin-bottom: 14px;
+        background: #fff;
+        border-left: 6px solid black;
+        transition: 0.2s;
+    }
+
+    .city-box:hover {
+        background: #eef6ff;
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+</style>
+
+<script>
+function searchCity() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let boxes = document.getElementsByClassName("city-box");
+
+    for (let i = 0; i < boxes.length; i++) {
+        let name = boxes[i].textContent.toLowerCase();
+        boxes[i].style.display = name.includes(input) ? "" : "none";
+    }
+}
+</script>
+
+</head>
+<body>
+
+<div class="header">MA Intelligence</div>
+
+<div class="gap"></div>
+
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-input"
+           placeholder="Search city..."
+           onkeyup="searchCity()">
+</div>
+<!-- City List -->
+<div class="city-list">
+  <div class="city-box" onclick="selectCity('Mian Channu')">Mian Channu</div>
+<div class="city-box" onclick="selectCity('Karachi')">Karachi</div>
+<div class="city-box" onclick="selectCity('Lahore')">Lahore</div>
+<div class="city-box" onclick="selectCity('Islamabad')">Islamabad</div>
+<div class="city-box" onclick="selectCity('Rawalpindi')">Rawalpindi</div>
+<div class="city-box" onclick="selectCity('Faisalabad')">Faisalabad</div>
+<div class="city-box" onclick="selectCity('Multan')">Multan</div>
+<div class="city-box" onclick="selectCity('Peshawar')">Peshawar</div>
+<div class="city-box" onclick="selectCity('Quetta')">Quetta</div>
+<div class="city-box" onclick="selectCity('Hyderabad')">Hyderabad</div>
+<div class="city-box" onclick="selectCity('Gujranwala')">Gujranwala</div>
+<div class="city-box" onclick="selectCity('Sialkot')">Sialkot</div>
+<div class="city-box" onclick="selectCity('Sargodha')">Sargodha</div>
+<div class="city-box" onclick="selectCity('Bahawalpur')">Bahawalpur</div>
+<div class="city-box" onclick="selectCity('Sukkur')">Sukkur</div>
+<div class="city-box" onclick="selectCity('Larkana')">Larkana</div>
+<div class="city-box" onclick="selectCity('Sheikhupura')">Sheikhupura</div>
+<div class="city-box" onclick="selectCity('Rahim Yar Khan')">Rahim Yar Khan</div>
+<div class="city-box" onclick="selectCity('Jhang')">Jhang</div>
+<div class="city-box" onclick="selectCity('Dera Ghazi Khan')">Dera Ghazi Khan</div>
+<div class="city-box" onclick="selectCity('Gujrat')">Gujrat</div>
+<div class="city-box" onclick="selectCity('Mardan')">Mardan</div>
+<div class="city-box" onclick="selectCity('Kasur')">Kasur</div>
+<div class="city-box" onclick="selectCity('Okara')">Okara</div>
+<div class="city-box" onclick="selectCity('Mirpur Khas')">Mirpur Khas</div>
+<div class="city-box" onclick="selectCity('Chiniot')">Chiniot</div>
+<div class="city-box" onclick="selectCity('Nawabshah')">Nawabshah</div>
+<div class="city-box" onclick="selectCity('Kamoke')">Kamoke</div>
+<div class="city-box" onclick="selectCity('Hafizabad')">Hafizabad</div>
+<div class="city-box" onclick="selectCity('Kohat')">Kohat</div>
+<div class="city-box" onclick="selectCity('Jacobabad')">Jacobabad</div>
+<div class="city-box" onclick="selectCity('Khanewal')">Khanewal</div>
+<div class="city-box" onclick="selectCity('Dera Ismail Khan')">Dera Ismail Khan</div>
+<div class="city-box" onclick="selectCity('Turbat')">Turbat</div>
+<div class="city-box" onclick="selectCity('Muzaffargarh')">Muzaffargarh</div>
+<div class="city-box" onclick="selectCity('Mingora')">Mingora</div>
+<div class="city-box" onclick="selectCity('Charsadda')">Charsadda</div>
+<div class="city-box" onclick="selectCity('Kamalia')">Kamalia</div>
+<div class="city-box" onclick="selectCity('Tando Allahyar')">Tando Allahyar</div>
+<div class="city-box" onclick="selectCity('Tando Adam')">Tando Adam</div>
+<div class="city-box" onclick="selectCity('Kandhkot')">Kandhkot</div>
+<div class="city-box" onclick="selectCity('Mansehra')">Mansehra</div>
+<div class="city-box" onclick="selectCity('Burewala')">Burewala</div>
+<div class="city-box" onclick="selectCity('Chaman')">Chaman</div>
+<div class="city-box" onclick="selectCity('Gwadar')">Gwadar</div>
+<div class="city-box" onclick="selectCity('Nowshera')">Nowshera</div>
+<div class="city-box" onclick="selectCity('Khuzdar')">Khuzdar</div>
+<div class="city-box" onclick="selectCity('Hub')">Hub</div>
+<div class="city-box" onclick="selectCity('Attock')">Attock</div>
+<div class="city-box" onclick="selectCity('Kotri')">Kotri</div>
+<div class="city-box" onclick="selectCity('Mandi Bahauddin')">Mandi Bahauddin</div>
+<div class="city-box" onclick="selectCity('Swabi')">Swabi</div>
+<div class="city-box" onclick="selectCity('Jhelum')">Jhelum</div>
+<div class="city-box" onclick="selectCity('Bahawalnagar')">Bahawalnagar</div>
+<div class="city-box" onclick="selectCity('Kharian')">Kharian</div>
+<div class="city-box" onclick="selectCity('Shikarpur')">Shikarpur</div>
+<div class="city-box" onclick="selectCity('Badin')">Badin</div>
+<div class="city-box" onclick="selectCity('Lodhran')">Lodhran</div>
+<div class="city-box" onclick="selectCity('Khairpur')">Khairpur</div>
+<div class="city-box" onclick="selectCity('Vehari')">Vehari</div>
+<div class="city-box" onclick="selectCity('Daska')">Daska</div>
+<div class="city-box" onclick="selectCity('Gojra')">Gojra</div>
+<div class="city-box" onclick="selectCity('Jaranwala')">Jaranwala</div>
+<div class="city-box" onclick="selectCity('Shahdadkot')">Shahdadkot</div>
+<div class="city-box" onclick="selectCity('Kamisar')">Kamisar</div>
+<div class="city-box" onclick="selectCity('Shahdadpur')">Shahdadpur</div>
+<div class="city-box" onclick="selectCity('Bhakkar')">Bhakkar</div>
+<div class="city-box" onclick="selectCity('Tando Muhammad Khan')">Tando Muhammad Khan</div>
+<div class="city-box" onclick="selectCity('Jatoi')">Jatoi</div>
+<div class="city-box" onclick="selectCity('Haripur')">Haripur</div>
+<div class="city-box" onclick="selectCity('Sadiqabad')">Sadiqabad</div>
+<div class="city-box" onclick="selectCity('Kohlu')">Kohlu</div>
+<div class="city-box" onclick="selectCity('Thatta')">Thatta</div>
+<div class="city-box" onclick="selectCity('Shahkot')">Shahkot</div>
+<div class="city-box" onclick="selectCity('Chishtian')">Chishtian</div>
+<div class="city-box" onclick="selectCity('Jampur')">Jampur</div>
+<div class="city-box" onclick="selectCity('Ahmedpur East')">Ahmedpur East</div>
+<div class="city-box" onclick="selectCity('Haveli Lakha')">Haveli Lakha</div>
+<div class="city-box" onclick="selectCity('Hangu')">Hangu</div>
+<div class="city-box" onclick="selectCity('Kharan')">Kharan</div>
+<div class="city-box" onclick="selectCity('Bannu')">Bannu</div>
+<div class="city-box" onclick="selectCity('Tank')">Tank</div>
+<div class="city-box" onclick="selectCity('Kot Addu')">Kot Addu</div>
+<div class="city-box" onclick="selectCity('Shabqadar')">Shabqadar</div>
+<div class="city-box" onclick="selectCity('Chakwal')">Chakwal</div>
+<div class="city-box" onclick="selectCity('Talagang')">Talagang</div>
+<div class="city-box" onclick="selectCity('Sahiwal (Sargodha)')">Sahiwal (Sargodha)</div>
+<div class="city-box" onclick="selectCity('Samundri')">Samundri</div>
+<div class="city-box" onclick="selectCity('Toba Tek Singh')">Toba Tek Singh</div>
+<div class="city-box" onclick="selectCity('Muzaffarabad')">Muzaffarabad</div>
+<div class="city-box" onclick="selectCity('Mirpur (AJK)')">Mirpur (AJK)</div>
+<div class="city-box" onclick="selectCity('Kotli')">Kotli</div>
+<div class="city-box" onclick="selectCity('Gilgit')">Gilgit</div>
+<div class="city-box" onclick="selectCity('Skardu')">Skardu</div>
+<div class="city-box" onclick="selectCity('Hunza')">Hunza</div>
+<div class="city-box" onclick="selectCity('Khuzdar')">Khuzdar</div>
+<div class="city-box" onclick="selectCity('Zhob')">Zhob</div>
+<div class="city-box" onclick="selectCity('Loralai')">Loralai</div>
+<div class="city-box" onclick="selectCity('Panjgur')">Panjgur</div>
+<div class="city-box" onclick="selectCity('Gwadar')">Gwadar</div>
+<div class="city-box" onclick="selectCity('Pasni')">Pasni</div>
+<div class="city-box" onclick="selectCity('Ormara')">Ormara</div>
+<div class="city-box" onclick="selectCity('Awaran')">Awaran</div>
+<div class="city-box" onclick="selectCity('Uthal')">Uthal</div>
+<div class="city-box" onclick="selectCity('Dera Allah Yar')">Dera Allah Yar</div>
+<div class="city-box" onclick="selectCity('Dera Murad Jamali')">Dera Murad Jamali</div>
+<div class="city-box" onclick="selectCity('Sibi')">Sibi</div>
+<div class="city-box" onclick="selectCity('Kalat')">Kalat</div>
+<div class="city-box" onclick="selectCity('Mastung')">Mastung</div>
+<div class="city-box" onclick="selectCity('Qila Abdullah')">Qila Abdullah</div>
+<div class="city-box" onclick="selectCity('Chilas')">Chilas</div>
+<div class="city-box" onclick="selectCity('Danyore')">Danyore</div>
+<div class="city-box" onclick="selectCity('Ghanche')">Ghanche</div>
+<div class="city-box" onclick="selectCity('Shigar')">Shigar</div>
+<div class="city-box" onclick="selectCity('Diamer')">Diamer</div>
+<div class="city-box" onclick="selectCity('Besham')">Besham</div>
+<div class="city-box" onclick="selectCity('Battagram')">Battagram</div>
+<div class="city-box" onclick="selectCity('Daggar')">Daggar</div>
+<div class="city-box" onclick="selectCity('Hassan Abdal')">Hassan Abdal</div>
+<div class="city-box" onclick="selectCity('Wah Cantt')">Wah Cantt</div>
+<div class="city-box" onclick="selectCity('Taxila')">Taxila</div>
+<div class="city-box" onclick="selectCity('Kallar Kahar')">Kallar Kahar</div>
+<div class="city-box" onclick="selectCity('Khewra')">Khewra</div>
+<div class="city-box" onclick="selectCity('Pind Dadan Khan')">Pind Dadan Khan</div>
+<div class="city-box" onclick="selectCity('Mianwali')">Mianwali</div>
+<div class="city-box" onclick="selectCity('Kalabagh')">Kalabagh</div>
+<div class="city-box" onclick="selectCity('Kundian')">Kundian</div>
+<div class="city-box" onclick="selectCity('Kot Mithan')">Kot Mithan</div>
+<div class="city-box" onclick="selectCity('Rajanpur')">Rajanpur</div>
+<div class="city-box" onclick="selectCity('Layyah')">Layyah</div>
+<div class="city-box" onclick="selectCity('Chowk Azam')">Chowk Azam</div>
+<div class="city-box" onclick="selectCity('Fort Abbas')">Fort Abbas</div>
+<div class="city-box" onclick="selectCity('Arifwala')">Arifwala</div>
+<div class="city-box" onclick="selectCity('Pakpattan')">Pakpattan</div>
+<div class="city-box" onclick="selectCity('Depalpur')">Depalpur</div>
+<div class="city-box" onclick="selectCity('Khanpur')">Khanpur</div>
+<div class="city-box" onclick="selectCity('Liaquatpur')">Liaquatpur</div>
+<div class="city-box" onclick="selectCity('Kot Samaba')">Kot Samaba</div>
+<div class="city-box" onclick="selectCity('Shorkot')">Shorkot</div>
+<div class="city-box" onclick="selectCity('Pindi Bhattian')">Pindi Bhattian</div>
+<div class="city-box" onclick="selectCity('Narowal')">Narowal</div>
+<div class="city-box" onclick="selectCity('Zafarwal')">Zafarwal</div>
+<div class="city-box" onclick="selectCity('Kharian Cantt')">Kharian Cantt</div>
+<div class="city-box" onclick="selectCity('Lalamusa')">Lalamusa</div>
+<div class="city-box" onclick="selectCity('Phalia')">Phalia</div>
+<div class="city-box" onclick="selectCity('Muridke')">Muridke</div>
+<div class="city-box" onclick="selectCity('Nankana Sahib')">Nankana Sahib</div>
+<div class="city-box" onclick="selectCity('Warburton')">Warburton</div>
+<div class="city-box" onclick="selectCity('Patoki')">Patoki</div>
+<div class="city-box" onclick="selectCity('Hujra Shah Muqeem')">Hujra Shah Muqeem</div>
+<div class="city-box" onclick="selectCity('Chunian')">Chunian</div>
+<div class="city-box" onclick="selectCity('Kot Radha Kishan')">Kot Radha Kishan</div>
+<div class="city-box" onclick="selectCity('Kot Abdul Malik')">Kot Abdul Malik</div>
+<div class="city-box" onclick="selectCity('Ferozewala')">Ferozewala</div>
+<div class="city-box" onclick="selectCity('Layyah City')">Layyah City</div>
+<div class="city-box" onclick="selectCity('Dunyapur')">Dunyapur</div>
+<div class="city-box" onclick="selectCity('Bahawalnagar City')">Bahawalnagar City</div>
+<div class="city-box" onclick="selectCity('Chichawatni')">Chichawatni</div>
+<div class="city-box" onclick="selectCity('Haroonabad')">Haroonabad</div>
+<div class="city-box" onclick="selectCity('Mian Channun')">Mian Channun</div>
+<div class="city-box" onclick="selectCity('Pir Mahal')">Pir Mahal</div>
+<div class="city-box" onclick="selectCity('Jalalpur Jattan')">Jalalpur Jattan</div>
+<div class="city-box" onclick="selectCity('Kharian City')">Kharian City</div>
+<div class="city-box" onclick="selectCity('Dina')">Dina</div>
+<div class="city-box" onclick="selectCity('Sohawa')">Sohawa</div>
+<div class="city-box" onclick="selectCity('Mandra')">Mandra</div>
+<div class="city-box" onclick="selectCity('Gujar Khan')">Gujar Khan</div>
+<div class="city-box" onclick="selectCity('Fateh Jang')">Fateh Jang</div>
+<div class="city-box" onclick="selectCity('Kot Fateh Khan')">Kot Fateh Khan</div>
+<div class="city-box" onclick="selectCity('Kohistan')">Kohistan</div>
+<div class="city-box" onclick="selectCity('Matta')">Matta</div>
+<div class="city-box" onclick="selectCity('Alpuri')">Alpuri</div>
+<div class="city-box" onclick="selectCity('Shangla')">Shangla</div>
+<div class="city-box" onclick="selectCity('Barikot')">Barikot</div>
+<div class="city-box" onclick="selectCity('Lakki Marwat')">Lakki Marwat</div>
+<div class="city-box" onclick="selectCity('Karak')">Karak</div>
+<div class="city-box" onclick="selectCity('Hassan Khel')">Hassan Khel</div>
+<div class="city-box" onclick="selectCity('Jamrud')">Jamrud</div>
+<div class="city-box" onclick="selectCity('Landi Kotal')">Landi Kotal</div>
+<div class="city-box" onclick="selectCity('Bara')">Bara</div>
+<div class="city-box" onclick="selectCity('Parachinar')">Parachinar</div>
+<div class="city-box" onclick="selectCity('Sadda')">Sadda</div>
+<div class="city-box" onclick="selectCity('Doaba')">Doaba</div>
+<div class="city-box" onclick="selectCity('Upper Dir')">Upper Dir</div>
+<div class="city-box" onclick="selectCity('Lower Dir')">Lower Dir</div>
+<div class="city-box" onclick="selectCity('Timergara')">Timergara</div>
+<div class="city-box" onclick="selectCity('Chitral')">Chitral</div>
+<div class="city-box" onclick="selectCity('Drosh')">Drosh</div>
+<div class="city-box" onclick="selectCity('Tangi')">Tangi</div>
+<div class="city-box" onclick="selectCity('Takht Bhai')">Takht Bhai</div>
+<div class="city-box" onclick="selectCity('Khairabad')">Khairabad</div>
+<div class="city-box" onclick="selectCity('Haripur City')">Haripur City</div>
+<div class="city-box" onclick="selectCity('Khanaspur')">Khanaspur</div>
+<div class="city-box" onclick="selectCity('Murree')">Murree</div>
+<div class="city-box" onclick="selectCity('Kahuta')">Kahuta</div>
+<div class="city-box" onclick="selectCity('Kotli Sattian')">Kotli Sattian</div>
+<div class="city-box" onclick="selectCity('Shahpur')">Shahpur</div>
+<div class="city-box" onclick="selectCity('Mankera')">Mankera</div>
+<div class="city-box" onclick="selectCity('Karor Lal Esan')">Karor Lal Esan</div>
+<div class="city-box" onclick="selectCity('Kharian')">Kharian</div>
+<div class="city-box" onclick="selectCity('Mandi Bahauddin')">Mandi Bahauddin</div>
+<div class="city-box" onclick="selectCity('Havelian')">Havelian</div>
+<div class="city-box" onclick="selectCity('Shahkot')">Shahkot</div>
+<div class="city-box" onclick="selectCity('Jaranwala')">Jaranwala</div>
+<div class="city-box" onclick="selectCity('Burewala')">Burewala</div>
+<div class="city-box" onclick="selectCity('Kamalia')">Kamalia</div>
+<div class="city-box" onclick="selectCity('Kabirwala')">Kabirwala</div>
+<div class="city-box" onclick="selectCity('Shorkot')">Shorkot</div>
+<div class="city-box" onclick="selectCity('Haroonabad')">Haroonabad</div>
+<div class="city-box" onclick="selectCity('Hasilpur')">Hasilpur</div>
+<div class="city-box" onclick="selectCity('Lodhran')">Lodhran</div>
+<div class="city-box" onclick="selectCity('Daska')">Daska</div>
+<div class="city-box" onclick="selectCity('Samundri')">Samundri</div>
+<div class="city-box" onclick="selectCity('Khanpur')">Khanpur</div>
+<div class="city-box" onclick="selectCity('Shikarpur')">Shikarpur</div>
+<div class="city-box" onclick="selectCity('Jacobabad')">Jacobabad</div>
+<div class="city-box" onclick="selectCity('Shahdadpur')">Shahdadpur</div>
+<div class="city-box" onclick="selectCity('Tando Adam')">Tando Adam</div>
+<div class="city-box" onclick="selectCity('Badin')">Badin</div>
+<div class="city-box" onclick="selectCity('Thatta')">Thatta</div>
+<div class="city-box" onclick="selectCity('Umerkot')">Umerkot</div>
+<div class="city-box" onclick="selectCity('Mithi')">Mithi</div>
+<div class="city-box" onclick="selectCity('Kohlu')">Kohlu</div>
+<div class="city-box" onclick="selectCity('Killa Saifullah')">Killa Saifullah</div>
+<div class="city-box" onclick="selectCity('Zhob')">Zhob</div>
+<div class="city-box" onclick="selectCity('Awaran')">Awaran</div>
+<div class="city-box" onclick="selectCity('Pasni')">Pasni</div>
+<div class="city-box" onclick="selectCity('Ormara')">Ormara</div>
+<div class="city-box" onclick="selectCity('Derawar')">Derawar</div>
+<div class="city-box" onclick="selectCity('Chishtian')">Chishtian</div>
+<div class="city-box" onclick="selectCity('Arifwala')">Arifwala</div>
+<div class="city-box" onclick="selectCity('Rajanpur')">Rajanpur</div>
+<div class="city-box" onclick="selectCity('Taunsa Sharif')">Taunsa Sharif</div>
+<div class="city-box" onclick="selectCity('Kot Addu')">Kot Addu</div>
+<div class="city-box" onclick="selectCity('Fort Abbas')">Fort Abbas</div>
+<div class="city-box" onclick="selectCity('Dunyapur')">Dunyapur</div>
+<div class="city-box" onclick="selectCity('Pattoki')">Pattoki</div>
+<div class="city-box" onclick="selectCity('Chunian')">Chunian</div>
+<div class="city-box" onclick="selectCity('Phool Nagar')">Phool Nagar</div>
+<div class="city-box" onclick="selectCity('Kahror Pakka')">Kahror Pakka</div>
+<div class="city-box" onclick="selectCity('Jatoi')">Jatoi</div>
+<div class="city-box" onclick="selectCity('Rojhan')">Rojhan</div>
+<div class="city-box" onclick="selectCity('Kotli Loharan')">Kotli Loharan</div>
+<div class="city-box" onclick="selectCity('Murree')">Murree</div>
+<div class="city-box" onclick="selectCity('Taxila')">Taxila</div>
+<div class="city-box" onclick="selectCity('Kallar Syedan')">Kallar Syedan</div>
+<div class="city-box" onclick="selectCity('Dina')">Dina</div>
+<div class="city-box" onclick="selectCity('Kotli')">Kotli</div>
+</div>
+<script>
+function selectCity(cityName) {
+    localStorage.setItem("selectedCity", cityName);
+
+    // FIXED — Now passing ?city=
+    window.location.href = "menu.html?city=" + cityName;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Continue Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Top Black Bar */
+        .top-bar {
+            width: 100%;
+            background-color: black;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .top-bar h1 {
+            color: white;
+            margin: 0;
+            font-size: 22px;
+        }
+
+        /* Heading below top bar */
+        .main-heading {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        /* Box Container */
+        .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        /* Boxes */
+        .box {
+            width: 160px;
+            height: 160px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .box-title {
+            margin-top: 10px;
+            font-weight: bold;
+            color: black;
+        }
+
+        /* Selected City Text */
+        .city-text {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .city-name {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Black Bar -->
+    <div class="top-bar">
+        <h1>MA Intelligence</h1>
+    </div>
+
+    <!-- NEW Heading under top bar -->
+    <div class="main-heading">
+        "Sell" or "Buy" products
+    </div>
+
+    <!-- Boxes -->
+    <div class="box-container">
+
+        <!-- Sell Box -->
+        <a href="sell.html" class="box">
+            <img src="https://cdn-icons-png.flaticon.com/512/6815/6815043.png">
+            <div class="box-title">Sell Products</div>
+        </a>
+
+        <!-- Buy Box -->
+        <a href="buy.html" class="box">
+            <img src="https://cdn-icons-png.flaticon.com/512/711/711239.png">
+            <div class="box-title">Buy Products</div>
+        </a>
+
+    </div>
+
+    <!-- Selected City Display -->
+    <!-- Selected City Text -->
+<div class="city-text">
+    Selected City: <span id="cityName">Not Selected</span>
+</div>
+
+<script>
+    // Read city from URL
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city");
+
+    // If city selected -> show it
+    if (city && city.trim() !== "") {
+        document.getElementById("cityName").textContent = city;
+    }
+    // If no city selected -> keep "Not Selected"
+</script>
+    <!-- Small City Selector Box -->
+<div onclick="window.location.href='city.html'" 
+     style="
+        width: 300px;
+        height: 20px;
+        padding: 15px;
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        background-color:white;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px auto;
+     ">
+    Select Your City
+</div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get("city");
+        document.getElementById("cityName").innerText = city;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - MA Intelligence</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #000000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .top-bar .logo {
+      font-weight: 900;
+      font-size: 22px;
+      color: #ffffff;
+    }
+
+    .hamburger {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 22px;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 25px;
+      background-color: #ffffff;
+      border-radius: 2px;
+    }
+
+    .scroll-panel {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      color: #000000;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .scroll-panel.open { max-height: 200px; }
+
+    .scroll-panel ul { list-style: none; }
+    .scroll-panel li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .scroll-panel li:hover { color: #ffffff; background-color: #000000; }
+
+    .main { margin-top: 80px; text-align: center; padding: 20px; }
+
+    .welcome-text {
+      font-size: 32px;
+      margin-bottom: 30px;
+      font-weight: 900;
+      color: #000000;
+    }
+
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 3px solid black;
+    }
+
+    .username {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      color: #000000;
+    }
+
+    .points-section {
+      max-width: 700px;
+      margin: 0 auto 50px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .points-line {
+      width: 50px;
+      height: 4px;
+      background-color: #000000;
+      margin-bottom: 10px;
+    }
+
+    .points-heading {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .points-box {
+      background-color: #f8f8f8;
+      padding: 20px 25px;
+      border-radius: 8px;
+    }
+
+    .info-list {
+      list-style: disc;
+      padding-left: 35px;
+      padding-right: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .info-list li { margin-bottom: 15px; }
+
+    .section-divider {
+      width: 100%;
+      height: 2px;
+      background-color: #000000;
+      margin: 30px 0;
+    }
+
+    .info-paragraph {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 18px;
+      text-align: left;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .privacy-policy {
+      max-width: 650px;
+      margin: 0 auto 40px auto;
+      text-align: left;
+      line-height: 1.8;
+      font-size: 16px;
+      padding-top: 15px;
+    }
+
+    .privacy-policy h3 { margin-bottom: 10px; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+
+<body>
+  <div class="menu-button" onclick="window.location.href='Menu.html'">
+    &#9776;
+</div>
+
+  <a href="settings.html">
+    <button>Settings</button>
+  </a>
+
+  <div class="top-bar">
+    <div class="logo">MA Intelligence</div>
+    <div class="hamburger" onclick="togglePanel()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="scroll-panel" id="scrollPanel">
+    <ul>
+      <li onclick="goHome()">Home Page</li>
+      <li onclick="goMenu()">Menu Page</li>
+      <li onclick="goSettings()">Settings Page</li>
+    </ul>
+  </div>
+
+  <div class="main">
+
+    <div class="welcome-text">Welcome to MA Intelligence</div>
+
+    <img id="profilePhoto" class="profile-photo">
+    <div id="username" class="username"></div>
+
+    <div class="points-section">
+      <div class="points-line"></div>
+      <div class="points-heading">Important Notes</div>
+      <div class="points-box">
+        <ul class="info-list">
+          <li>Select a city in which you want to sell and buy your products.</li>
+          <li>We don’t deliver products.</li>
+          <li>We only provide you customers.</li>
+          <li>You are responsible for delivery arrangements.</li>
+          <li>You can paste any product link for customers to buy.</li>
+        </ul>
+      </div>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="info-paragraph">
+      You need to select a city in which you want to sell and buy your products. We don’t deliver products, and we only provide you customers. It is your responsibility whether you deliver the products yourself or let the customers pick them up. You can also take a product link from any website, paste it, and the customer can buy it from there.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="privacy-policy">
+      <h2>Privacy & Policy</h2>
+      <h3>
+        Speak with customers kindly. Be kind, don't use abusive language. Stay honest.  
+        Deliver your products to customers yourself; it is not our responsibility.  
+        Select a city where you can deliver your products, otherwise take a link from any website and paste it so customers can buy from there.
+      </h3>
+      <div class="section-divider"></div>
+      <h2>Thanks for reading our policy.</h2>
+    </div>
+
+  </div>
+
+  <script>
+    function togglePanel() {
+      document.getElementById('scrollPanel').classList.toggle('open');
+    }
+
+    function goHome() { window.location.href = "home.html"; }
+    function goMenu() {
+    window.location.href = "menu.html";
+}
+
+    // ⭐ CORRECT SETTINGS LINK
+    function goSettings() { 
+      window.location.href = "settings.html"; 
+    }
+
+    window.onload = function() {
+      document.getElementById("profilePhoto").src = localStorage.getItem("userImage");
+      document.getElementById("username").textContent = localStorage.getItem("userName");
+    };
+  </script>
+
+</body>
+</html>
