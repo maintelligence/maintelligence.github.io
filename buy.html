@@ -99,43 +99,30 @@ function loadProducts(){
         let hasPosts = false;
 
         Object.values(data).forEach(post => {
-    const contactLink = post.contact.startsWith("http") 
-        ? post.contact 
-        : "https://wa.me/" + post.contact;
+            // Filter by city
+            if(post.city && post.city.toLowerCase() === selectedCity.toLowerCase()){
+                hasPosts = true;
 
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-        <img src="${post.imageURL}" class="product-image">
-        <div class="product-price">Price: ${post.price}</div>
-        <div class="product-description">${post.description}</div>
-                            <div class="product-city">City: ${post.city}</div>
-        <a href="${contactLink}" target="_blank" class="contact-link">Contact Seller</a>
-    `;
-    container.appendChild(card);
-});
+                const contactLink = post.contact.startsWith("http") 
+                    ? post.contact 
+                    : "https://wa.me/" + post.contact;
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${post.imageURL}" class="product-image">
+                    <div class="product-price">Price: ${post.price}</div>
+                    <div class="product-description">${post.description}</div>
+                    <div class="product-city">City: ${post.city}</div>
+                    <a href="${contactLink}" target="_blank" class="contact-link">Contact Seller</a>
+                `;
+                container.appendChild(card);
+            }
+        });
 
         noResults.style.display = hasPosts ? 'none' : 'block';
     });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadProducts();
-
-    document.getElementById('searchInput').addEventListener('input', function(){
-        const q = this.value.toLowerCase();
-        let found = false;
-        document.querySelectorAll('.product-card').forEach(card=>{
-            if(card.textContent.toLowerCase().includes(q)){
-                card.style.display='block';
-                found = true;
-            } else {
-                card.style.display='none';
-            }
-        });
-        document.getElementById('noResults').style.display = found ? 'none' : 'block';
-    });
-});
+    }
 </script>
 
 </body>
