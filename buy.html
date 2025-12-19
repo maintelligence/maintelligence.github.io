@@ -103,14 +103,17 @@ function loadProducts(){
                 hasPosts = true;
                 const card = document.createElement('div');
                 card.className = 'product-card';
+
+                // Decide if post.contact is WhatsApp number or website link
+                let finalLink = post.contact.startsWith("http") ? post.contact : "https://wa.me/" + post.contact;
+                let linkText = post.contact.startsWith("http") ? "View Link" : "Contact Seller";
+
                 card.innerHTML = `
                     <img src="${post.imageURL}" class="product-image">
                     <div class="product-price">Price: ${post.price}</div>
                     <div class="product-description">${post.description}</div>
                     <div class="product-city">City: ${post.city}</div>
-                    <a href="https://wa.me/${post.contact}" class="contact-link">
-  Contact Seller
-</a>
+                    <a href="${finalLink}" target="_blank" class="contact-link">${linkText}</a>
                 `;
                 container.appendChild(card);
             }
@@ -140,4 +143,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 </body>
-    </html>
+</html>
