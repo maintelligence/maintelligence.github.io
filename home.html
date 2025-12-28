@@ -189,6 +189,9 @@
       <li onclick="goHome()">Home Page</li>
       <li onclick="goMenu()">Menu Page</li>
       <li onclick="goSettings()">Settings Page</li>
+            <li onclick="goPrivacy()">Privacy Page</li>
+      <li onclick="goAbout()">About Page</li>
+      <li onclick="goContact()">Contact Page</li>
     </ul>
   </div>
 
@@ -246,6 +249,15 @@
     // ⭐ CORRECT SETTINGS LINK
     function goSettings() { 
       window.location.href = "settings.html"; 
+    }
+    function goPrivacy() { 
+      window.location.href = "privacy.html"; 
+    }
+    function goAbout() { 
+      window.location.href = "about.html"; 
+    }
+    function goContact() { 
+      window.location.href = "contact.html"; 
     }
 
     window.onload = function() {
