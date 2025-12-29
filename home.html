@@ -253,12 +253,10 @@
     function goPrivacy() { 
       window.location.href = "privacy.html"; 
     }
-    function goAbout() { 
-      window.location.href = "about.html"; 
-    }
-    function goContact() { 
-      window.location.href = "contact.html"; 
-    }
+    
+    function goContact() { window.location.href = "contact.html"; }
+    
+    function goAbout() { window.location.href = "about.html"; }
 
     window.onload = function() {
       document.getElementById("profilePhoto").src = localStorage.getItem("userImage");
