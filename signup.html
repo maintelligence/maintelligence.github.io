@@ -156,7 +156,7 @@
   <script>
   // ⭐ If user already registered, go directly to home page
   if (localStorage.getItem("userName") && localStorage.getItem("userImage")) {
-      window.location.href = "home.html";
+      window.location.href = "index.html";
   }
 
     function showPreview(event) {
@@ -205,7 +205,7 @@
         localStorage.setItem("userDOB", fullDOB);
         localStorage.setItem("userImage", e.target.result);
 
-        window.location.href = "home.html";
+        window.location.href = "index.html";
       };
       reader.readAsDataURL(file);
     }
